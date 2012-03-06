@@ -1,0 +1,12 @@
+<productData>
+	<product>
+		<item_name>Star Trek Bathrobe</item_name>
+		<item_type>Clothing</item_type>
+		<amount>$39.99 USD</amount>
+	</product>
+	<product>
+		<item_name>Karotz</item_name>
+		<item_type>Gedget</item_type>
+		<amount>$129.99</amount>
+	</product>
+</productData>
