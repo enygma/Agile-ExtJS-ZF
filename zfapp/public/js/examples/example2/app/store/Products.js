@@ -1,5 +1,9 @@
+/**
+ * Define the example2 Product store
+ */
 Ext.define('example2.store.Products',{
 	
+	/** Extend the default Ext data store */
 	extend	: 'Ext.data.Store',
 
 	// we can hard-code the fields
@@ -7,7 +11,6 @@ Ext.define('example2.store.Products',{
 
 	// or use a model!
 	model	: 'example2.model.Product'
-
 
 	// You can define default data here too!
 	// data 	: [

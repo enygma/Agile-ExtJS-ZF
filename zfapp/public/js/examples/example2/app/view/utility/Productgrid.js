@@ -1,12 +1,26 @@
+/**
+ * Define the default grid view to use in listing our products
+ */
 Ext.define('example2.view.utility.Productgrid',{
 	
+	/** Extend the default grid (panel) */
 	extend: 'Ext.grid.Panel',
+
+	/** Set an alias for the grid */
 	alias: 'widget.productgrid',
 
+	/** Define the grid title */
 	title: 'Current Products',
 
+	/** Assign a store to load into the grid */
 	store: 'Products',
 
+	/**
+	 * Intiialize the view component
+	 * Sets up the column definition of the grid
+	 *
+	 * @method
+	 */
 	initComponent: function() {
 		console.log('launching grid');
 
