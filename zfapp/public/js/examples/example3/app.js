@@ -20,7 +20,8 @@ Ext.application({
                 },
                 {
                 	region	: 'center',
-                	xtype	: 'panel'
+                	xtype	: 'panel',
+                    id      : 'content_area'
                 },
                 {
                 	region	: 'north',

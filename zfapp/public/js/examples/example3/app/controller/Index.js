@@ -11,7 +11,7 @@ Ext.define('example3.controller.Index', {
 		'index.Buttons'
 	],
 	models	: [],
-	stores	: [],
+	stores	: ['Sample'],
 
 	/** initialize the controller object */
 	init: function()
