@@ -49,7 +49,7 @@ Ext.define('example3.view.index.Buttons', {
 					Ext.getCmp('content_area').remove(f, true);
 				}
 
-				var grid = Ext.create('example3.view.index.Samplegrid');
+				var grid = Ext.create('example3.view.index.Sampletabs');
 				Ext.getCmp('content_area').add(grid);
 			}
 		},
