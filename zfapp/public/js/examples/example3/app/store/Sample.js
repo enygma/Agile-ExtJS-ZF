@@ -1,10 +1,15 @@
-//sample store
+/**
+ * Define a store & data for use with the Samplegrid
+ */
 Ext.define('example3.store.Sample', {
 
+	/** Extend the default Store */
 	extend	: 'Ext.data.Store',
 
+	/** Point to the sample model for the store */
 	model 	: 'example3.model.Sample',
 
+	/** Define some data for the sore */
 	data	: [
 		{
 			character_name	: 'Arthur Dent',

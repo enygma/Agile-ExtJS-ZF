@@ -1,17 +1,22 @@
+/**
+ * Define a sample grid view
+ */
 Ext.define('example3.view.index.Samplegrid', {
 	
+	/** Extend the default grid */
 	extend	: 'Ext.grid.Panel',
 
+	/** Assign an alias to the widget */
 	alias	: 'widget.samplegrid',
 
+	/** Give the grid a title */
 	title	: 'Sample Grid',
 
+	/** The store to pull data from */
 	store	: 'Sample',
 
-	//renderTo: Ext.get('content_area'),
-
+	/** Initialize the grid */
 	initComponent: function() {
-		// init
 		console.log('init sample grid');
 
 		// column definition for the grid
