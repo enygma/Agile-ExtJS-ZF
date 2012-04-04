@@ -61,9 +61,14 @@ class ExampleController extends Zend_Controller_Action
 	public function example5Action()
 	{
 		$this->view->users = array(
-			array('name'=>'User #1'),
-			array('name'=>'User #2')
+			array('name'=>'User #1 ZF'),
+			array('name'=>'User #2 ZF')
 		);
+		$this->view->success = true;
+	}
+	public function example5updateAction()
+	{
+		error_log('updating!');
 		$this->view->success = true;
 	}
 	public function example6Action()

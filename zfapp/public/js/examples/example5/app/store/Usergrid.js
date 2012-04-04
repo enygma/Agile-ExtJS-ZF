@@ -8,7 +8,10 @@ Ext.define('example5.store.Usergrid', {
 
 	proxy : {
 		type: 'ajax',
-		url: '/example/example5/format/json',
+		api: {
+			read 	: '/example/example5/format/json',
+			update	: '/example/example5update/format/json'
+		},
 		reader: {
 			type: 'json',
 			root: 'users',
