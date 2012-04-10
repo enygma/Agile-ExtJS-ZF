@@ -1,81 +1,178 @@
 <?php
+/**
+ * ExampleController - handles frontend ExtJS requests
+ * 
+ * PHP Version 5.3+
+ * 
+ * @category Controller
+ * @package  AgileExtJsZf
+ * @author   Chris Cornutt <ccornutt@phpdeveloper.org>
+ * @license  MIT http://google.com?q=mit+license
+ * @version  1.0
+ * @link     https://github.com/enygma/Agile-ExtJS-ZF
+ */
+
+/**
+ * ExampleController - handles frontend ExtJS requests
+ * 
+ * @category Controller
+ * @package  AgileExtJsZf
+ * @author   Chris Cornutt <ccornutt@phpdeveloper.org>
+ * @license  MIT http://google.com?q=mit+license
+ * @version  1.0
+ * @link     https://github.com/enygma/Agile-ExtJS-ZF
+ */
 
 class ExampleController extends Zend_Controller_Action
 {
+    /**
+     * Initialize the controller object
+     * 
+     * @return void
+     */
+    public function init()
+    {
+        $this->_helper->contextSwitch()
+            ->addActionContext('example2', array('xml', 'json'))
+            ->addActionContext('example3', array('xml', 'json'))
+            ->addActionContext('example4', array('xml', 'json'))
+            ->addActionContext('example5', array('xml', 'json'))
+            ->addActionContext('example5update', array('xml', 'json'))
+            ->setAutoJsonSerialization(true)
+            ->initContext();
+    }
 
-	public function init()
-	{
-	    $this->_helper->contextSwitch()
-          ->addActionContext('example2', array('xml', 'json'))
-          ->addActionContext('example3', array('xml', 'json'))
-          ->addActionContext('example4', array('xml', 'json'))
-          ->addActionContext('example5', array('xml', 'json'))
-          ->setAutoJsonSerialization(true)
-          ->initContext();
-	}
+    /**
+     * Outputs the list of the examples (defined in the view)
+     * 
+     * @return void
+     */
+    public function indexAction()
+    {
+        //nothing to see, just used for outputting the examples list
+    }
 
-	public function indexAction()
-	{
+    /**
+     * Outputs Example #1 (simple window)
+     * 
+     * @return void
+     */
+    public function example1Action()
+    {
+        //nothing to see, just used for outputting the example
+    }
+    
+    /**
+     * This is used in the example related to models and stores
+     * 
+     * @return void
+     */
+    public function example2Action()
+    {
+        // NOTE: hard-coded sleep to show the loader
+        sleep(1);
 
-	}
-	public function example1Action()
-	{
+        $this->view->products = array(
+            array(
+                'item_name'     => 'Tekno Black Light Bubbles',
+                'item_type'     => 'Toy',
+                'amount'        => '$3.99 USD'
+            ),
+            array(
+                'item_name'     => 'Sheldon\'s Spot',
+                'item_type'     => 'T-Shirt',
+                'amount'        => '$17.99 USD'
+            )
+        );
+    }
 
-	}
-	
-	/**
-	 * This is used in the example related to models and stores
-	 */
-	public function example2Action()
-	{
-		// NOTE: hard-coded sleep to show the loader
-		sleep(1);
+    /**
+     * Output to show tree view example
+     * 
+     * @return void
+     */
+    public function example3Action()
+    {
+        $this->view->tree_items = array(
+            array('text' => 'Item #1'),
+            array('text' => 'Item #2'),
+        );
+    }
 
-		$this->view->products = array(
-			array(
-				'item_name'		=> 'Tekno Black Light Bubbles',
-				'item_type'		=> 'Toy',
-				'amount'		=> '$3.99 USD'
-			),
-			array(
-				'item_name'		=> 'Sheldon\'s Spot',
-				'item_type'		=> 'T-Shirt',
-				'amount'		=> '$17.99 USD'
-			)
-		);
-	}
-	public function example3Action()
-	{
-		$this->view->tree_items = array(
-			array('text' => 'Item #1'),
-			array('text' => 'Item #2'),
-		);
-	}
-	public function example4Action()
-	{
-		$this->view->mytree = array(
-			array('id'=>'test1','text'=>'text field 1'),
-			array('id'=>'test2','text'=>'text field 2')
-		);
-	}
-	public function example5Action()
-	{
-		$this->view->users = array(
-			array('name'=>'User #1 ZF'),
-			array('name'=>'User #2 ZF')
-		);
-		$this->view->success = true;
-	}
-	public function example5updateAction()
-	{
-		error_log('updating!');
-		$this->view->success = true;
-	}
-	public function example6Action()
-	{
-		
-	}
-	
+    /**
+     * Working with Layouts
+     * 
+     * @return void
+     */
+    public function example4Action()
+    {
+        $this->view->mytree = array(
+            array('id'=>'test1','text'=>'text field 1'),
+            array('id'=>'test2','text'=>'text field 2')
+        );
+    }
+
+    /**
+     * Pulling data from the database for user informat
+     * 
+     * @return void
+     */
+    public function example5Action()
+    {
+        $users = new Application_Model_User();
+        $user = $users->fetchAll();
+
+        $this->view->users = array();
+
+        foreach ($user as $u) {
+            $this->view->users[] = array(
+                'name' => $u->name,
+                'id'   => $u->ID
+            );
+        }
+        $this->view->success = true;
+    }
+    
+    /**
+     * Update action for the example5
+     * 
+     * @return void
+     */
+    public function example5updateAction()
+    {
+        // the frontend sends the request back in the POST body
+        // so we have to fetch it
+        $request = json_decode($this->getRequest()->getRawBody());
+
+        try {
+            // using the ID in the $request, update the name
+            $users  = new Application_Model_User();
+            $db     = $users::getDefaultAdapter();
+
+            $stmt = $db->prepare('UPDATE users set name = :name where id = :id');
+            $stmt->bindParam('id', $request->id);
+            $stmt->bindParam('name', $request->name);
+            $stmt->execute();
+
+            // return success if there's no failure
+            $this->view->success = true;
+
+        } catch (Exception $e) {
+            error_log('ERROR saving user: '.$e->getMessage());
+            $this->view->success = 'false';
+        }
+    }
+
+    /**
+     * Example6
+     * 
+     * @return void
+     */
+    public function example6Action()
+    {
+        
+    }
+    
 }
 
 ?>

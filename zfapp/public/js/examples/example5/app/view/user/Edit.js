@@ -4,7 +4,6 @@ Ext.define('example5.view.user.Edit', {
 
 	title	: 'Edit User',
 	alias	: 'widget.useredit',
-
 	layout	: 'fit',
 
 	autoShow: true,
@@ -19,8 +18,13 @@ Ext.define('example5.view.user.Edit', {
 						xtype	  : 'textfield',
 						name 	  : 'name',
 						fieldLabel: 'Name'
+					},
+					{
+						xtype     : 'hiddenfield',
+						name      : 'id'
 					}
-				]
+				],
+				bodyPadding: 5
 			}
 		];
 
