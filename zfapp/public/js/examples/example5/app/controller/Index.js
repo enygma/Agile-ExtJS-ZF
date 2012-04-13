@@ -4,6 +4,7 @@ Ext.define('example5.controller.Index', {
 
 	views:  [
 		'index.Grid',
+		'index.Helperbar',
 		'user.Edit'
 	],
 	models: [
@@ -22,6 +23,12 @@ Ext.define('example5.controller.Index', {
 			},
 			'useredit button[action=save]': {
 				click: this.updateUser
+			},
+			'helperbar button[action=add]': {
+				click: this.addUser
+			},
+			'adduser button[action=create]': {
+				click: this.createUser
 			}
 		});
 	},
@@ -41,7 +48,20 @@ Ext.define('example5.controller.Index', {
 
 		record.set(values);
 		currentWin.close();
-		this.getUsergridStore().sync();
+	},
 
+	addUser: function() {
+		var widget = Ext.widget('useradd');
+	},
+
+	createUser: function(button) {
+		console.log('create user!');
+
+		var currentWin = button.up('window'),
+			values 	   = currentWin.down('form').getValues();
+
+		this.getUsergridStore().add(values);
+		currentWin.close();
+		//this.getUsergridStore().sync();
 	}
 });

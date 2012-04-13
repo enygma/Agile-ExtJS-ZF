@@ -22,6 +22,11 @@ Ext.define('example5.view.user.Edit', {
 					{
 						xtype     : 'hiddenfield',
 						name      : 'id'
+					},
+					{
+						xtype	  : 'hiddenfield',
+						name      : 'action_type',
+						value     : 'edit'
 					}
 				],
 				bodyPadding: 5
@@ -38,7 +43,7 @@ Ext.define('example5.view.user.Edit', {
 				scope	: this,
 				handler	: this.close
 			}
-		]
+		];
 
 		this.callParent(arguments);
 	}
