@@ -2,6 +2,7 @@ Ext.define('example5.view.index.Grid', {
 	
 	extend: 'Ext.grid.Panel',
 	alias: 'widget.usergrid',
+	id: 'usergrid',
 
 	store: 'Usergrid',
 

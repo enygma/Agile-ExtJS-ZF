@@ -29,6 +29,9 @@ Ext.define('example5.controller.Index', {
 			},
 			'adduser button[action=create]': {
 				click: this.createUser
+			},
+			'deleteuser button[action=delete]': {
+				click: this.deleteUser
 			}
 		});
 	},
@@ -63,5 +66,15 @@ Ext.define('example5.controller.Index', {
 		this.getUsergridStore().add(values);
 		currentWin.close();
 		//this.getUsergridStore().sync();
+	},
+
+	deleteUser: function(button) {
+		console.log('deleting user!');
+
+		var selectedRecord = Ext.getCmp('usergrid').getSelectionModel().getSelection();
+		var currentWin     = button.up('window');
+
+		this.getUsergridStore().remove(selectedRecord[0]);
+		currentWin.close();
 	}
 });

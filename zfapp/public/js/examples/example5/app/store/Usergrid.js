@@ -14,7 +14,7 @@ Ext.define('example5.store.Usergrid', {
 			read 	: '/example/example5/format/json',
 			// update	: '/example/example5update/format/json',
 			// create	: '/example/example5update/format/json',
-			// destroy	: '/example/example5update/format/json',
+			destroy	: '/example/example5update/format/json?method=delete',
 		},
 		reader: {
 			type: 'json',
