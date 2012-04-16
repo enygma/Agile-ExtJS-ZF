@@ -140,52 +140,41 @@ class ExampleController extends Zend_Controller_Action
      */
     public function example5updateAction()
     {
-        error_log('update action');
-
         // the frontend sends the request back in the POST body
         // so we have to fetch it
         $request = json_decode($this->getRequest()->getRawBody());
-
-        error_log('request: '.print_r($request,true));
+        //error_log('request: '.print_r($request,true));
 
         $method = $this->getRequest()->getParam('method');
+        //error_log('method: '.var_export($method,true));
 
         try {
-            if (empty($request->id)){
-                $users  = new Application_Model_User();
-                $db     = $users::getDefaultAdapter();
 
-                $stmt = $db->prepare('INSERT INTO users VALUES (:name,NULL)');
-                $stmt->bindParam('name',$request->name);
-                $stmt->execute();
+            $users  = new Application_Model_User();
+            $db     = $users::getDefaultAdapter();
 
-                $this->view->success = true;
-                
-            } elseif ($method !== null && $method == 'delete') {
-
-                $users  = new Application_Model_User();
-                $db     = $users::getDefaultAdapter();
-
-                $stmt = $db->prepare('DELETE FROM users WHERE id = :id');
-                $stmt->bindParam('id', $request->id);
-                $stmt->execute();
-
-                // return success if there's no failure
-                $this->view->success = true;
-
-            } else {
-                // using the ID in the $request, update the name
-                $users  = new Application_Model_User();
-                $db     = $users::getDefaultAdapter();
-
-                $stmt = $db->prepare('UPDATE users SET name = :name where id = :id');
-                $stmt->bindParam('id', $request->id);
-                $stmt->bindParam('name', $request->name);
-                $stmt->execute();
-
-                // return success if there's no failure
-                $this->view->success = true;
+            switch($method) {
+                case 'update':
+                    $stmt = $db->prepare('UPDATE users SET name = :name where id = :id');
+                    $stmt->bindParam('id', $request->id);
+                    $stmt->bindParam('name', $request->name);
+                    $stmt->execute();
+                    break;
+                case 'create':
+                    $stmt = $db->prepare('INSERT INTO users VALUES (:name,NULL)');
+                    $stmt->bindParam('name', $request->name);
+                    $stmt->execute();
+                    break;
+                case 'delete':
+                    $stmt = $db->prepare('DELETE FROM users WHERE id = :id');
+                    $stmt->bindParam('id', $request->id);
+                    $stmt->execute();
+                    break;
+                default:
+                    // pull the records
             }
+
+            $this->view->success = 'true';
 
         } catch (Exception $e) {
             error_log('ERROR saving user: '.$e->getMessage());
