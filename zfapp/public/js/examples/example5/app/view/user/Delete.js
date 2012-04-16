@@ -1,7 +1,7 @@
 Ext.define('example5.view.user.Delete', {
 	
-	extend: 'Ext.window.Window',
-	alias: 'widget.deleteuser',
+	extend   : 'Ext.window.Window',
+	alias    : 'widget.deleteuser',
 
 	autoShow : true,
 	width    : 300,

@@ -1,11 +1,10 @@
 Ext.define('example5.view.user.Add', {
 	
-	extend: 'Ext.window.Window',
-	alias: 'widget.adduser',
-	layout: 'fit',
-	title: 'Add New User',
-
-	autoShow: true,
+	extend   : 'Ext.window.Window',
+	alias    : 'widget.adduser',
+	layout   : 'fit',
+	title    : 'Add New User',
+	autoShow : true,
 
 	initComponent: function() {
 		this.items = [

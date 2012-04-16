@@ -24,13 +24,6 @@ Ext.define('example5.view.index.Helperbar', {
 				Ext.create('example5.view.user.Delete');
 			}
 		}
-	],
-
-	initComponent: function() {
-
-
-
-		this.callParent(arguments);
-	}
-
+	]
+	
 });

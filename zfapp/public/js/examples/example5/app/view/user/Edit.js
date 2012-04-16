@@ -1,12 +1,10 @@
 Ext.define('example5.view.user.Edit', {
 	
-	extend	: 'Ext.window.Window',
-
-	title	: 'Edit User',
-	alias	: 'widget.useredit',
-	layout	: 'fit',
-
-	autoShow: true,
+	extend	 : 'Ext.window.Window',
+	title	 : 'Edit User',
+	alias	 : 'widget.useredit',
+	layout	 : 'fit',
+	autoShow : true,
 
 	initComponent: function()
 	{

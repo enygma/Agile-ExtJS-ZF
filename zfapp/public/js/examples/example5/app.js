@@ -19,8 +19,8 @@ Ext.application({
                 },
                 {
                 	xtype : 'helperbar',
-                	region: 'south',
-                	height: 40,
+                	region: 'north',
+                	height: 30,
                 	margin: 1
                 }
             ]
