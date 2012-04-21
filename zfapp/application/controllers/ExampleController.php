@@ -38,6 +38,7 @@ class ExampleController extends Zend_Controller_Action
             ->addActionContext('example4', array('xml', 'json'))
             ->addActionContext('example5', array('xml', 'json'))
             ->addActionContext('example5update', array('xml', 'json'))
+            ->addActionContext('example6submit', array('xml', 'json'))
             ->setAutoJsonSerialization(true)
             ->initContext();
     }
@@ -191,7 +192,61 @@ class ExampleController extends Zend_Controller_Action
     {
         
     }
+    public function example6submitAction()
+    {
+        $request  = $this->getRequest();
+        $form     = new Application_Form_Login();
+
+        $success  = false;
+        $message  = null;
+
+        $username = $request->getParam('username');
+        $password = $request->getParam('password');
+
+        //error_log('uname: '.$username.' -> '.$password);
+
+        if ($request->isPost()) {
+            if ($form->isValid($request->getPost())) {
+
+                $result = $this->_checkDbLogin($form->getValues());
+
+                $success = $result['success'];
+                $message = $result['message'];
+            }
+        }
+
+        $this->view->success = $success;
+        $this->view->message = $message;
+    }
     
+    private function _checkDbLogin($values)
+    {
+        $dbAdapter   = Zend_Db_Table::getDefaultAdapter();
+        $authAdapter = new Zend_Auth_Adapter_DbTable($dbAdapter);
+
+        $authAdapter->setTableName('users')
+            ->setIdentityColumn('name')
+            ->setCredentialColumn('password')
+            ->setCredentialTreatment('MD5(?)');
+
+        $authAdapter->setIdentity($values['username']);
+        $authAdapter->setCredential($values['password']);
+
+        $auth       = Zend_Auth::getInstance();
+        $authResult = $auth->authenticate($authAdapter);
+
+        if ($authResult->isValid()) {
+            return array(
+                'success' => true,
+                'message' => $authResult->getMessages()
+            );
+        } else {
+            return array(
+                'success' => false,
+                'message' => $authResult->getMessages()
+            );
+        }
+    }
 }
 
 ?>
