@@ -29,59 +29,77 @@ Ext.define('example6.view.index.Login', {
 				},
 				{
 					xtype      : 'container',
-					dock       : 'top',
 					id         : 'msg',
-					height     : 0,
 					border	   : false,
+					style      : 'width:270'
 				}
-			]
+			],
+			region: 'center'
 		}
 	],
+
+	keys: [
+        { 
+        	key: [Ext.EventObject.ENTER], handler: function(keyCode, evt) {
+
+                //Ext.Msg.alert("Alert","Enter Key Event !");
+
+                //console.log(Ext.getCmp('loginForm'));
+                //Ext.getCmp(evt.getTarget().id).down('form').submit();
+
+                //Ext.getCmp('loginForm').submit();
+                Ext.getCmp('loginWin').submitForm();
+            }
+        }
+    ],
 
 	buttons: [
 		{
 			text    : 'Login',
 			handler : function() {
-
-				var btn = this;
-
-				//var form = this.up('form').getForm();
-				var form = Ext.getCmp('loginForm').getForm();
-				console.log(form);
-
-				if (form.isValid()) {
-					form.submit({
-						success: function(form,action) {
-
-							console.log('Form submit success! Response: '+action.result.message);
-							var msg 		= Ext.getCmp('msg');
-							msg.update(action.result.message);
-							
-						},
-						failure: function(form,action) {
-							console.log('Form submit failure! Response: '+action.result.message);
-
-							var currentWin  = btn.up().up();
-							var msg 		= Ext.getCmp('msg');
-
-							msg.update(action.result.message);
-							msg.setSize(Ext.getCmp('msg').getWidth(),40);
-							Ext.getCmp('msg').addClass('showmsg');
-
-							currentWin.setSize(
-								currentWin.getWidth(),
-								currentWin.getHeight()+40
-							);
-						}
-					});
-				}
+				Ext.getCmp('loginWin').submitForm();
 			}
-		},
-		// {
-		// 	text    : 'Cancel',
-		// 	scope   : this,
-		// 	handler : this.close
-		// }
-	]
+		}
+	],
+
+	submitForm: function() {
+
+		var form 		= Ext.getCmp('loginForm').getForm();
+		var currentWin  = Ext.getCmp('loginWin');
+
+		if (form.isValid()) {
+			form.submit({
+				success: function(form,action) {
+					console.log('Form submit success! Response: '+action.result.message);
+
+					//var currentWin  = btn.up().up();
+					currentWin.resizeWinow(
+						'successmsg',
+						action.result.message+'<br/><br/><img src="/img/babywin.jpg" width="180">'
+					);
+				},
+				failure: function(form,action) {
+					console.log('Form submit failure! Response: '+action.result.message);
+
+					//var currentWin  = btn.up().up();
+					currentWin.resizeWinow(
+						'errmsg',
+						action.result.message+'<br/><br/><img src="/img/catcheese.jpg" width="180">'
+					);
+				}
+			});
+		}
+	},
+
+	resizeWinow: function(className,message) {
+
+		var msg = Ext.getCmp('msg');
+
+		msg.setSize(Ext.getCmp('msg').getWidth(),200);
+		Ext.getCmp('msg').addClass(className);
+
+		this.setSize(this.getWidth(),320);
+		msg.update(message);
+	}
 
 });
