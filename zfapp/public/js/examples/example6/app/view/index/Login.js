@@ -20,12 +20,16 @@ Ext.define('example6.view.index.Login', {
 					xtype      : 'textfield',
 					name       : 'username',
 					fieldLabel : 'Username',
+					allowBlank : false,
+					minLength  : 5
 				},
 				{
 					xtype      : 'textfield',
 					inputType  : 'password',
 					name       : 'password',
 					fieldLabel : 'Password',
+					allowBlank : false,
+					regex      : new RegExp('[a-z0-9A-Z]')
 				},
 				{
 					xtype      : 'container',
