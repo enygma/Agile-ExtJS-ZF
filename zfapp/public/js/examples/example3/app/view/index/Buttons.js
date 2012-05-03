@@ -49,26 +49,10 @@ Ext.define('example3.view.index.Buttons', {
 					Ext.getCmp('content_area').remove(f, true);
 				}
 
-				var grid = Ext.create('example3.view.index.Sampletabs');
-				Ext.getCmp('content_area').add(grid);
+				var tabs = Ext.create('example3.view.index.Sampletabs');
+				Ext.getCmp('content_area').add(tabs);
 			}
 		},
-		// {
-		// 	margin: 4,
-		// 	xtype	: 'button',
-		// 	text	: 'Load Drag & Drop',
-		// 	handler: function() {
-		// 		console.log('load DnD');
-
-		// 		//clear out the panel...
-		// 		while(f = Ext.getCmp('content_area').items.first()){
-		// 			Ext.getCmp('content_area').remove(f, true);
-		// 		}
-
-		// 		var panel = Ext.create('example3.view.index.Samplednd');
-		// 		Ext.getCmp('content_area').add(panel);
-		// 	}
-		// },
 		{
 			margin: 4,
 			xtype	: 'button',
@@ -84,6 +68,22 @@ Ext.define('example3.view.index.Buttons', {
 				var tree = Ext.create('example3.view.index.Sampletree');
 				Ext.getCmp('content_area').add(tree);
 			}
-		}
+		},
+		{
+			margin: 4,
+			xtype	: 'button',
+			text	: 'Load Multi-column Tree',
+			handler: function() {
+				console.log('load multi-tree');
+
+				//clear out the panel...
+				while(f = Ext.getCmp('content_area').items.first()){
+					Ext.getCmp('content_area').remove(f, true);
+				}
+
+				var panel = Ext.create('example3.view.index.Multicoltree');
+				Ext.getCmp('content_area').add(panel);
+			}
+		},
 	]
 });

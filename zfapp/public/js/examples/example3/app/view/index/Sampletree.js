@@ -1,38 +1,39 @@
 Ext.define('example3.view.index.Sampletree', {
 
-	extend: 'Ext.panel.Panel',
+	extend: 'Ext.tree.Panel',
+		
+	title  : 'Sample Tree Panel',
 
 	alias  : 'widget.sampletree',
-	
-	items  : [
-		Ext.create('Ext.tree.Panel', {
-			
-			title  : 'Sample Tree Panel',
 
-			width  : 400,
-			height : 400,
+	width  : 400,
+	height : 400,
 
-			store: Ext.create('Ext.data.TreeStore', {
-			    root: {
-			        text: 'Root',
-			        expanded: true,
-			        children: [
-			            {
-			                text: 'Child 1',
-			                children: [
-			                	{
-			                		text: 'Child 1-1',
-			                		leaf: true
-			                	}
-			                ]
-			            },
-			            {
-			                text: 'Child 2',
-			                leaf: true
-			            }
-			        ]
-			    }
-			})
-		})
-	]
+	// show the root node or not
+	//rootVisible: false,
+
+	// show the lines connecting the parent/child
+	//lines: true,
+
+	store: Ext.create('Ext.data.TreeStore', {
+	    root: {
+	        text: 'Root',
+	        expanded: true,
+	        children: [
+	            {
+	                text: 'Child 1',
+	                children: [
+	                	{
+	                		text: 'Child 1-1',
+	                		leaf: true
+	                	}
+	                ]
+	            },
+	            {
+	                text: 'Child 2',
+	                leaf: true
+	            }
+	        ]
+	    }
+	})
 });

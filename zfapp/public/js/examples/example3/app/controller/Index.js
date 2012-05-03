@@ -12,7 +12,8 @@ Ext.define('example3.controller.Index', {
 		'index.Samplegrid',
 		'index.Samplednd',
 		'index.Sampletabs',
-		'index.Sampletree'
+		'index.Sampletree',
+		'index.Multicoltree'
 	],
 	models	: ['Sample'],
 	stores	: ['Sample'],
