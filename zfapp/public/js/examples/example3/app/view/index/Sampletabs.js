@@ -30,8 +30,7 @@ Ext.define('example3.view.index.Sampletabs', {
 			title: 'Three',
 			layout: 'fit',
 			padding: 10,
-			items: Ext.create('example3.view.index.Samplegrid')
+			xtype: 'samplegrid'
 		}
 	]
-
-})
+});

@@ -8,9 +8,13 @@ Ext.define('example3.controller.Index', {
 
 	/** set up views, models, stores used in this controller */
 	views	: [
-		'index.Buttons'
+		'index.Buttons',
+		'index.Samplegrid',
+		'index.Samplednd',
+		'index.Sampletabs',
+		'index.Sampletree'
 	],
-	models	: [],
+	models	: ['Sample'],
 	stores	: ['Sample'],
 
 	/** initialize the controller object */
