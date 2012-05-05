@@ -39,6 +39,7 @@ class ExampleController extends Zend_Controller_Action
             ->addActionContext('example5', array('xml', 'json'))
             ->addActionContext('example5update', array('xml', 'json'))
             ->addActionContext('example6submit', array('xml', 'json'))
+            ->addActionContext('example8submit', array('xml', 'json'))
             ->setAutoJsonSerialization(true)
             ->initContext();
     }
@@ -219,6 +220,31 @@ class ExampleController extends Zend_Controller_Action
         $this->view->message = $message;
     }
     
+    public function example7Action()
+    {
+        // unit testing with Jasmine
+    }
+
+    public function example8Action()
+    {
+        // chat application
+    }
+
+    public function example8submitAction()
+    {
+        // gets the submit of the chat message
+        error_log(__FUNCTION__);
+
+        error_log($this->getRequest()->getParam('username'));
+
+        $users  = new Application_Model_Chatuser();
+        //$db     = $users::getDefaultAdapter();
+        //$users->
+
+        $this->view->success = true;
+        $this->view->message = 'okay!';
+    }
+
     private function _checkDbLogin($values)
     {
         $dbAdapter   = Zend_Db_Table::getDefaultAdapter();
