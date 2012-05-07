@@ -15,6 +15,7 @@ CREATE TABLE `chat_user` (
 CREATE TABLE `chat_messages` (
 	message TEXT,
 	chatuser_id INT,
+	date_posted INT,
 	ID INT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY(ID)
 );
