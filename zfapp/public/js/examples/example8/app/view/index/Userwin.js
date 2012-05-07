@@ -44,6 +44,9 @@ Ext.define('example8.view.index.Userwin', {
 				success: function(form,action) {
 					console.log('Form submit success! Response: '+action.result.message);
 
+					// get the user's ID from the response
+					
+
 					var formValues = form.getValues();
 					console.log(formValues);
 

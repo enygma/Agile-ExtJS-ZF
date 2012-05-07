@@ -11,10 +11,16 @@ Ext.application({
 		console.log('Launch application "example8"');
 
 		Ext.create('Ext.container.Viewport', {
-            layout: 'fit',
+            layout: 'border',
             items: [
                 {
-                	xtype  : 'userwin'
+                	xtype  : 'userlistgrid',
+                	region : 'west',
+                	width  : 150
+                },
+                {
+                	xtype  : 'chatwin',
+                	region : 'center'
                 }
             ]
         });

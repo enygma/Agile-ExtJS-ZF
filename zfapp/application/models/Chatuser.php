@@ -30,6 +30,14 @@ class Application_Model_Chatuser extends Zend_Db_Table_Abstract
      */
     protected $_name = 'chat_user';
 
+    protected $_referenceMap = array(
+        'User' => array(
+            'columns'       => 'ID',
+            'refTableClass' => 'Application_Model_Chatmessage',
+            'refColumns'    => 'chatuser_id'
+        )
+    );
+
     /**
      * Initialize the model object
      * 
