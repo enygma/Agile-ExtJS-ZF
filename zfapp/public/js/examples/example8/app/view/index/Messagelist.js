@@ -5,8 +5,12 @@ Ext.define('example8.view.index.Messagelist', {
 
 	//title	: 'Sample Grid',
 	store	: 'Messagelist',
-
+	id: 'messagelist',
 	hideHeaders: true,
+
+	viewConfig: {
+		loadMask: false
+	},
 
 	initComponent: function() {
 

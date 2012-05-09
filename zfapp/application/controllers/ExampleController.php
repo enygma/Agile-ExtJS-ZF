@@ -41,6 +41,7 @@ class ExampleController extends Zend_Controller_Action
             ->addActionContext('example6submit', array('xml', 'json'))
             ->addActionContext('example8submit', array('xml', 'json'))
             ->addActionContext('example8read', array('xml', 'json'))
+            ->addActionContext('example8users', array('xml', 'json'))
             ->setAutoJsonSerialization(true)
             ->initContext();
     }
@@ -233,16 +234,44 @@ class ExampleController extends Zend_Controller_Action
 
     public function example8readAction()
     {
-        $request = json_decode($this->getRequest()->getRawBody());
-        $msg     = new Application_Model_Chatmessage();
+        $request      = json_decode($this->getRequest()->getRawBody());
+        $filterUserId = $this->getRequest()->getParam('filterBy');
+        $username     = $this->getRequest()->getParam('username');
+        $msg          = new Application_Model_Chatmessage();
+
+        if (!empty($username)) {
+            // we're changing our username... 
+            $user  = new Application_Model_Chatuser();
+            $found = $user->findByUsername($username);
+
+            if (count($found)==0) {
+                // new user - add to the table!
+                $insertId = $user->addUser($username);
+                $this->view->insertUserId = $insertId;
+            } else {
+                $this->view->insertUserId = $found[0]->ID;
+            }
+        }
 
         if (isset($request->message)) {
             // add the message!
-            $msg->add($request->message);
+            $userId = (!empty($request->chatUser)) ? $request->chatUser : null;
+            $msg->add($request->message,$userId);
         }
 
+        // see if we need to filter the list
+        $filterUserId = ($filterUserId !== null && (int)$filterUserId !== 0) 
+            ? $filterUserId : null;
+
         // get the latest messages from the list
-        $this->view->messages = $msg->getLatest(20);
+        $this->view->messages = $msg->getLatest(20,$filterUserId);
+        $this->view->success = true;
+    }
+
+    public function example8usersAction()
+    {
+        $user = new Application_Model_Chatuser();
+        $this->view->users = $user->getCurrent();
     }
 
     private function _checkDbLogin($values)

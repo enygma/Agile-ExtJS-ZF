@@ -11,7 +11,7 @@ Ext.define('example8.view.index.Userwin', {
 	items: [
 		{
 			xtype: 'form',
-			url: '/example/example8submit/format/json',
+			url: '/example/example8read/format/json',
 			id: 'userform',
 			bodyStyle: 'padding: 5px',
 			items: [
@@ -29,39 +29,37 @@ Ext.define('example8.view.index.Userwin', {
 	buttons: [
 		{
 			text    : 'Enter',
+			id: 'userwinsubmit',
 			handler : function() {
-				Ext.getCmp('userwin').submitForm();
+				//Ext.getCmp('userwin').submitForm();
 			}
 		}
 	],
 
-	submitForm: function() {
-		var form 		= Ext.getCmp('userform').getForm();
-		var currentWin  = Ext.getCmp('userwin');
+	// submitForm: function() {
+	// 	var form 		= Ext.getCmp('userform').getForm();
+	// 	var currentWin  = Ext.getCmp('userwin');
 
-		if (form.isValid()) {
-			form.submit({
-				success: function(form,action) {
-					console.log('Form submit success! Response: '+action.result.message);
+	// 	if (form.isValid()) {
+	// 		form.submit({
+	// 			success: function(form,action) {
+	// 				console.log('Form submit success! Response: '+action.result.message);
 
-					// get the user's ID from the response
-					
+	// 				var formValues = form.getValues();
+	// 				console.log(formValues);
 
-					var formValues = form.getValues();
-					console.log(formValues);
-
-					// set the user information into our currentuser store
-					var cuser = indexController.getStore('Currentuser');
-					console.log(cuser);
-					cuser.add({
-						name: formValues.username,
-						id: 1
-					});
-				},
-				failure: function(form,action) {
-					console.log('Form submit failure! Response: '+action.result.message);
-				}
-			});
-		}
-	}
+	// 				// set the user information into our currentuser store
+	// 				var cuser = indexController.getStore('Currentuser');
+	// 				console.log(cuser);
+	// 				cuser.add({
+	// 					name: formValues.username,
+	// 					id: 0
+	// 				});
+	// 			},
+	// 			failure: function(form,action) {
+	// 				console.log('Form submit failure! Response: '+action.result.message);
+	// 			}
+	// 		});
+	// 	}
+	// }
 });

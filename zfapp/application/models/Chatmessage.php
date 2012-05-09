@@ -32,6 +32,14 @@ class Application_Model_Chatmessage extends Zend_Db_Table_Abstract
 
     protected $_dependentTables = array('Application_Model_Chatuser');
 
+    protected $_referenceMap = array(
+        'Message' => array(
+            'columns'       => 'chatuser_id',
+            'refTableClass' => 'Application_Model_Chatuser',
+            'refColumns'    => 'ID'
+        )
+    );
+
     //private $user = null;
 
     /**
@@ -49,17 +57,18 @@ class Application_Model_Chatmessage extends Zend_Db_Table_Abstract
      * 
      * @param int $limit Limit the number of values returned
      */
-    public function getLatest($limit=10)
+    public function getLatest($limit=10,$filterUserId=null)
     {
-        $results = $this->fetchAll(
-            $this->select()
-                ->order('date_posted DESC')
-                ->limit($limit)
-        );
+        $select = $this->select()->order('date_posted DESC')->limit($limit);
+        if ($filterUserId !== null) {
+            $select = $select->where('chatuser_id = '.$filterUserId);
+        }
+        $results = $this->fetchAll($select);
 
         $messages = array();
         foreach($results as $message) {
-            
+            //error_log(print_r($message,true));
+
             $related = $message->findDependentRowset('Application_Model_Chatuser');
             $messages[] = array(
                 'message' => $message->message,
@@ -73,11 +82,11 @@ class Application_Model_Chatmessage extends Zend_Db_Table_Abstract
 
         return $messages;
     }
-    public function add($message)
+    public function add($message,$userId=1)
     {
         $data = array(
             'message' => $message,
-            'chatuser_id' => 1,
+            'chatuser_id' => $userId,
             'date_posted' => time()
         );
         $this->insert($data);

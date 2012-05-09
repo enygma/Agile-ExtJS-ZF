@@ -6,7 +6,8 @@ Ext.define('example8.model.Message', {
 		{ name: 'posted', type: 'string' },
 		{ name: 'username', type: 'string' },
 		{ name: 'ts', type: 'int' },
-		{ name: 'id', type: 'int' }
+		{ name: 'id', type: 'int' },
+		{ name: 'chatUser', type: 'int'}
 	]
 
 });

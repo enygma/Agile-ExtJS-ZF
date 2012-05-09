@@ -1,6 +1,15 @@
 Ext.define('example8.model.Userlist', {
 	
 	extend: 'Ext.data.Model',
-	fields: ['username','id']
+	fields: [
+		{ 
+			name:'username',
+			type:'string',
+		},
+		{ 
+			name: 'id', 
+			type: 'int'
+		}
+	],
 
 });
