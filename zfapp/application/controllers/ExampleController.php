@@ -274,6 +274,11 @@ class ExampleController extends Zend_Controller_Action
         $this->view->users = $user->getCurrent();
     }
 
+    public function example9Action()
+    {
+        //nothing to see, move along
+    }
+
     private function _checkDbLogin($values)
     {
         $dbAdapter   = Zend_Db_Table::getDefaultAdapter();
