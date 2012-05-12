@@ -13,5 +13,3 @@ This example will show how to:
 			. a hard-coded data set
 			. pulled from an XML file
 			. pulled from the Zend Framework backend (context switching)
-
-author: Chris Cornutt <ccornutt@phpdeveloper.org>
