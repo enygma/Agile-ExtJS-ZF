@@ -1,5 +1,3 @@
-pulling users into a grid and updating them via zf
-
 Example #5 : Working with Grids & Database Backend
 ===========
 
