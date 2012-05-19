@@ -84,6 +84,6 @@ Ext.define('example3.view.index.Buttons', {
 				var panel = Ext.create('example3.view.index.Multicoltree');
 				Ext.getCmp('content_area').add(panel);
 			}
-		},
+		}
 	]
 });
