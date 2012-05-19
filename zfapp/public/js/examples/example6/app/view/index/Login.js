@@ -79,8 +79,7 @@ Ext.define('example6.view.index.Login', {
 					//var currentWin  = btn.up().up();
 					currentWin.resizeWinow(
 						'successmsg',
-						action.result.message+'<br/><br/><img src="/img/babywin.jpg" width="180">'
-					);
+						action.result.message+'<br/><br/><img src="/img/babywin.jpg" width="180">');
 				},
 				failure: function(form,action) {
 					console.log('Form submit failure! Response: '+action.result.message);
@@ -88,8 +87,7 @@ Ext.define('example6.view.index.Login', {
 					//var currentWin  = btn.up().up();
 					currentWin.resizeWinow(
 						'errmsg',
-						action.result.message+'<br/><br/><img src="/img/catcheese.jpg" width="180">'
-					);
+						action.result.message+'<br/><br/><img src="/img/catcheese.jpg" width="180">');
 				}
 			});
 		}
