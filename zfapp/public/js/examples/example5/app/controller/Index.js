@@ -14,6 +14,11 @@ Ext.define('example5.controller.Index', {
 		'Usergrid'
 	],
 
+	currentUser: {
+		name: 'enygma',
+		id: 1
+	},
+
 	init: function() {
 		console.log('Index controller');
 
