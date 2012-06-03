@@ -1,12 +1,18 @@
+/**
+ * Define the Index (main) controller
+ */
 Ext.define('example8.controller.Index', {
 	
+	/** Extend the default Controller */
 	extend: 'Ext.app.Controller',
 
+	/** Autolod these models */
 	models: [
 		'User',
 		'Userlist',
 		'Message'
 	],
+	/** Autolod these views */
 	views: [
 		'index.Userwin',
 		'index.Userlist',
@@ -14,15 +20,18 @@ Ext.define('example8.controller.Index', {
 		'index.Messagelist',
 		'index.Chatinput'
 	],
+	/** Autoload these stores */
 	stores: [
 		'Currentuser',
 		'Userlist',
 		'Messagelist'
 	],
 
+	/** Initialize the controller */
 	init: function() {
 		console.log('init Index controller');
 
+		/** Set up some defaults */
 		indexController = this;
 		indexController.messageParams = {};
 		indexController.currentUser = {
@@ -30,7 +39,9 @@ Ext.define('example8.controller.Index', {
 			id: 1
 		};
 
+		/** Define the interactions for the controller and view components */
 		this.control({
+			/** Submit the message field on Enter */
 			'#chatMessage': {
 				specialkey: function(field,e) {
 					if(e.getKey() == e.ENTER && field.getValue().length > 0) {
@@ -40,9 +51,12 @@ Ext.define('example8.controller.Index', {
 					}
 				}
 			},
+			/** 
+			 * When the item on the Current User list is clicked,
+			 *     the current messages will be filtered by that username
+			 */
 			'userlistgrid': {
 				itemclick: function(element,record,item,index,evt) {
-					// filter our grid based on the username
 					var filterUser   = record.data.id;
 					var messageStore = Ext.getCmp('messagelist').getStore();
 
@@ -52,6 +66,7 @@ Ext.define('example8.controller.Index', {
 					});
 				}
 			},
+			/** Submit the "change username" form, complete with validation */
 			'#userwinsubmit': {
 				click: function(el) {
 					var form = Ext.getCmp('userform').getForm();
@@ -75,6 +90,10 @@ Ext.define('example8.controller.Index', {
 									cp.renderUserLink(formValues.username)
 								);
 
+								/** 
+								 * Reload the store (refreshes the Current User list view) 
+								 *     and close the window
+								 */
 								Ext.getCmp('userlistgrid').getStore().load();
 
 								Ext.getCmp('userwin').close();
@@ -88,7 +107,8 @@ Ext.define('example8.controller.Index', {
 				}
 			}
 		});
-
+	
+		/** Define a task to execute periodically - this updates the Message List store */
 		var task = Ext.TaskManager.start({
 		  run: function(){
 		    Ext.getCmp('messagelist').getStore().load({params: indexController.messageParams});
@@ -97,10 +117,12 @@ Ext.define('example8.controller.Index', {
 		});
 	},
 
+	/** Create the "change username" window */
 	loadUserWin: function() {
 		Ext.create('example8.view.index.Userwin');
 	},
 
+	/** Update the "Current Messages" */
 	updateMessages: function() {
 
 		var formValues = Ext.getCmp('chatForm').getValues();

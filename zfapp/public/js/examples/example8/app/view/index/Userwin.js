@@ -1,19 +1,37 @@
+/**
+ * Define the Userwin view (allows the change of the current username)
+ */
 Ext.define('example8.view.index.Userwin', {
 	
+	/** Extend the default Window */
 	extend: 'Ext.window.Window',
+
+	/** Give it an alias */
 	alias: 'widget.userwin',
+
+	/** Define a window title */
 	title: 'Please enter a username',
+
+	/** Show the window when it's loaded */
 	autoShow : true,
+
+	/** Use the "anchor" layout */
 	layout: 'anchor',
+
+	/** Give the object an ID */
 	id: 'userwin',
+
+	/** Set the window width */
 	width: 300,
 
+	/** Define items to put inside the window */
 	items: [
 		{
-			xtype: 'form',
-			url: '/example/example8read/format/json',
-			id: 'userform',
-			bodyStyle: 'padding: 5px',
+			/** A Form with one field - username */
+			xtype     : 'form',
+			url       : '/example/example8read/format/json',
+			id        : 'userform',
+			bodyStyle : 'padding: 5px',
 			items: [
 				{
 					xtype      : 'textfield',
@@ -26,40 +44,11 @@ Ext.define('example8.view.index.Userwin', {
 		}
 	],
 
+	/** Add an "Enter" button to the window */
 	buttons: [
 		{
-			text    : 'Enter',
-			id: 'userwinsubmit',
-			handler : function() {
-				//Ext.getCmp('userwin').submitForm();
-			}
+			text : 'Enter',
+			id   : 'userwinsubmit'
 		}
-	],
-
-	// submitForm: function() {
-	// 	var form 		= Ext.getCmp('userform').getForm();
-	// 	var currentWin  = Ext.getCmp('userwin');
-
-	// 	if (form.isValid()) {
-	// 		form.submit({
-	// 			success: function(form,action) {
-	// 				console.log('Form submit success! Response: '+action.result.message);
-
-	// 				var formValues = form.getValues();
-	// 				console.log(formValues);
-
-	// 				// set the user information into our currentuser store
-	// 				var cuser = indexController.getStore('Currentuser');
-	// 				console.log(cuser);
-	// 				cuser.add({
-	// 					name: formValues.username,
-	// 					id: 0
-	// 				});
-	// 			},
-	// 			failure: function(form,action) {
-	// 				console.log('Form submit failure! Response: '+action.result.message);
-	// 			}
-	// 		});
-	// 	}
-	// }
+	]
 });
