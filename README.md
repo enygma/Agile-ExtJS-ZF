@@ -12,6 +12,8 @@ combination of Zend Framework (PHP) and ExtJS (Javascript MVC) including:
 These examples also include a more complete application (example9), a multi-user 
 chat application.
 
+This is a part of a presentation given at the Dutch PHP Conference 2012 (http://phpconference.nl).
+
 
 Setting up a Zend Framework instance
 ================
