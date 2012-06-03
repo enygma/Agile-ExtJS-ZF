@@ -1,7 +1,11 @@
+/**
+ * Define a test for the application
+ */
 describe("Application Tests", function() {
 
-	it("has loaded example9 app", function() {
-		expect(example9).toBeDefined();
+	/** Check to ensure that the application is loaded */
+	it("has loaded example7 app", function() {
+		expect(example7).toBeDefined();
 	});
 	
 });

@@ -1,8 +1,12 @@
+/**
+ * Define tests for the Index controller
+ */
 describe("Index", function() {
 	
 	var store = null,
 		ctlr  = null;
 
+	/** Before each of the tests are run (like setUp) */
 	beforeEach(function() {
 		if (!ctlr) {
 			ctlr = Application.getController('Index');
@@ -20,6 +24,7 @@ describe("Index", function() {
 		);
 	});
 
+	/** Check that, when the store is loaded, there's usernames in it */
 	it("should have usernames", function() {
 		store.on('load', function() {
 			expect(store.getCount()).toBeGreaterThan(1);

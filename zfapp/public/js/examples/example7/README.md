@@ -1,4 +1,4 @@
-Example #9 : Unit Testing with Jasmine
+Example #7 : Unit Testing with Jasmine
 ===========
 
 This example will show you how to:
