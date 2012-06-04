@@ -1,7 +1,12 @@
+/**
+ * Define Index controller
+ */
 Ext.define('example5.controller.Index', {
 	
+	/** Extend default Controller */
 	extend: 'Ext.app.Controller',
 
+	/** Autoload views, models & stores */
 	views:  [
 		'index.Grid',
 		'index.Helperbar',
@@ -14,11 +19,13 @@ Ext.define('example5.controller.Index', {
 		'Usergrid'
 	],
 
+	/** Define a default "current user" */
 	currentUser: {
 		name: 'enygma',
 		id: 1
 	},
 
+	/** Initialize the controller */
 	init: function() {
 		console.log('Index controller');
 
@@ -41,11 +48,13 @@ Ext.define('example5.controller.Index', {
 		});
 	},
 
+	/** Handles the editing of a user record in the grid */
 	editUser: function(grid,record) {
 		var widget = Ext.widget('useredit');
 		widget.down('form').loadRecord(record);
 	},
 
+	/** Handles the update of a user in the grid */
 	updateUser: function(button) {
 		// only fires if there's a change to the value!
 
@@ -58,10 +67,12 @@ Ext.define('example5.controller.Index', {
 		currentWin.close();
 	},
 
+	/** Fired when a new user is added to the grid */
 	addUser: function() {
 		var widget = Ext.widget('useradd');
 	},
 
+	/** Handles teh creation of a new user */
 	createUser: function(button) {
 		console.log('create user!');
 
@@ -73,6 +84,7 @@ Ext.define('example5.controller.Index', {
 		//this.getUsergridStore().sync();
 	},
 
+	/** Handles the deletion of a user */
 	deleteUser: function(button) {
 		console.log('deleting user!');
 

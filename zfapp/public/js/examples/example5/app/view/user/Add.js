@@ -1,11 +1,20 @@
+/**
+ * Create the "add user" view (window)
+ */
 Ext.define('example5.view.user.Add', {
 	
+	/** Extend the default Window object */
 	extend   : 'Ext.window.Window',
+
+	/** Give it an alias, layout and title */
 	alias    : 'widget.adduser',
 	layout   : 'fit',
 	title    : 'Add New User',
+
+	/** Tell it to show as soon as created */
 	autoShow : true,
 
+	/** Initialize the component */
 	initComponent: function() {
 		this.items = [
 			{
@@ -16,6 +25,8 @@ Ext.define('example5.view.user.Add', {
 						name       : 'name',
 						fieldLabel : 'Name',
 						allowBlank : false,
+
+						/** Real-time validation on the object */
 						validator  : function(value) {
 							if (Ext.getCmp('createUserBtn')) {
 								if (value.length > 0) {
@@ -37,6 +48,7 @@ Ext.define('example5.view.user.Add', {
 			}
 		];
 
+		/** Create buttons for the window */
 		this.buttons = [
 			{
 				text     : 'Create User',

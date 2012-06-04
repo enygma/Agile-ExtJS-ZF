@@ -1,12 +1,22 @@
+/**
+ * Define the store for the user list grid
+ */
 Ext.define('example5.store.Usergrid', {
 	
+	/** Extend the default Store */
 	extend: 'Ext.data.Store',
 
+	/** Link to a model for structure */
 	model: 'example5.model.Users',
 
+	/** Set store to autoload & autsync */
 	autoLoad: true,
 	autoSync: true,
 
+	/** 
+	 * Set up the store's data source
+	 *     NOTE: The different URLs for CRUD
+	 */
 	proxy : {
 		type: 'ajax',
 		// default URL
